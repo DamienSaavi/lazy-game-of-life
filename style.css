@@ -2,16 +2,14 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    -webkit-user-select: none; /* Safari */        
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
+
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
 
   }
   
-  html,
+
   body {
-    font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(189, 185, 124);
   }
   
@@ -30,12 +28,17 @@
     width: fit-content;
     background-color: rgb(161, 161, 161);
     border-spacing: 1px;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
   }
 
   td {
     width: 20px;
     max-width: 20px;
     min-width: 8px;
+    /* transition: background-color 50ms linear; */
   }
 
   td:after {
@@ -117,14 +120,4 @@
     width: 200px;
     border-color: hsl(138,60%,20%);
     background-color: hsl(138,60%,40%);
-  }
-
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type=number] {
-    -moz-appearance: textfield;
   }

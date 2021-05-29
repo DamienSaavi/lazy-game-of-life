@@ -4,7 +4,7 @@ const app = Vue.createApp({
             grid: [],
             dimx: 32,
             dimy: 32,
-            simSpeed: 1000,
+            simSpeed: 7,
             keepGoing: false,
             mouseDown: false
         }
@@ -64,7 +64,7 @@ const app = Vue.createApp({
             this.updateGrid()
 
             if (this.keepGoing)
-                setTimeout(() => this.runSim(), 1100 - this.simSpeed);
+                setTimeout(() => this.runSim(), 300 - this.simSpeed*30);
         },
 
         toggleMouse(isDown) {
@@ -95,6 +95,15 @@ const app = Vue.createApp({
             
             this.dimy = Number(event.target.value)
             this.clearGrid()
+        },
+
+        changeSpeed(event) {
+            if (event.target.value > 10)
+                event.target.value = 10
+            else if (event.target.value < 1)
+                event.target.value = 1
+
+            this.simSpeed = Number(event.target.value)
         }
     },
     mounted() {
