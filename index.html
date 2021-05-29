@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta hhtp-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Game of Life</title>
+</head>
+
+<body>
+    <div id='app'>
+        <div class='controls-container'>
+            <div class='dim-container'>
+                <label class='dim' for="numRows">Width:
+                    <input onclick="this.select()" type="number" min="8" max="64" :value="dimx" class='range' id="numRows"
+                        @change="changeX"></label>
+                <label class='dim' for="numCols">Height:
+                    <input onclick="this.select()" type="number" min="8" max="64" :value="dimy" class='range' id="numCols"
+                        @change="changeY"></label>
+            </div>
+            <div class='btn-container'>
+                <button id='clear' v-on:click='clearGrid()'>Clear</button>
+                <button id='step' v-on:click='updateGrid()'>Step</button>
+                <button id='play' v-on:click='toggleSim()'>{{keepGoing ? 'Stop Game' : 'Run Game'}}</button>
+            </div>
+        </div>
+        <table :class="keepGoing ? 'transparent' : ''" @mousedown="toggleMouse(true)" @mouseup="toggleMouse(false)"
+            @mouseleave="toggleMouse(false)">
+            <tr v-for="(row , i) in grid">
+                <td v-for="(cell, j) in row" :class="cell ? 'on' : 'off'" @mousedown="toggleCell(i,j)"
+                    @mouseenter="drawCell(i,j)">
+                    <!-- {{cell}} -->
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
