@@ -72,7 +72,6 @@ const app = Vue.createApp({
         },
 
         clearGrid() {
-            console.log(this.dimx, this.dimy)
             this.keepGoing = false
             this.grid = [...Array(this.dimy)].map(x => Array(this.dimx).fill(0))
         },
