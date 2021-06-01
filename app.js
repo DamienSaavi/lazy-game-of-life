@@ -2,7 +2,7 @@ const app = Vue.createApp({
     data() {
         return {
             grid: [],
-            dimx: 32,
+            dimx: 64,
             dimy: 32,
             simSpeed: 7,
             keepGoing: false,
@@ -77,8 +77,8 @@ const app = Vue.createApp({
         },
 
         changeX(event) {
-            if (event.target.value > 64)
-                event.target.value = 64
+            if (event.target.value > 128)
+                event.target.value = 128
             else if (event.target.value < 8)
                 event.target.value = 8
             
@@ -87,8 +87,8 @@ const app = Vue.createApp({
         },
 
         changeY(event) {
-            if (event.target.value > 64)
-                event.target.value = 64
+            if (event.target.value > 128)
+                event.target.value = 128
             else if (event.target.value < 8)
                 event.target.value = 8
             
