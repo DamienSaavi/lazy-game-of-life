@@ -4,22 +4,20 @@ const app = Vue.createApp({
             grid: [],
             activeCells: {},
             scope: {},
-            dimx: 64,
-            dimy: 64,
-            simSpeed: 10,
+            dimx: 32,
+            dimy: 32,
+            maxx: 128,
+            maxy: 128,
+            simSpeed: 7,
             keepGoing: false,
             mouseDown: false
         }
     },
     methods: {
         updateGrid() {
-
-            this.scope = {}
-            const nextGrid = [...Array(this.dimy)].map(x => Array(this.dimx).fill(0))
-            const nextActiveCells = {}
+            this.scope = { ...this.activeCells }
 
             for (cell in this.activeCells) {
-
                 const i = Number(cell.split(',')[0])
                     , j = Number(cell.split(',')[1])
 
@@ -29,49 +27,37 @@ const app = Vue.createApp({
                         if ((di == i && dj == j) || di < 0 || di >= this.dimy || dj < 0 || dj >= this.dimx)
                             continue
 
-
                         const neighCell = `${di},${dj}`
 
                         if (this.scope[neighCell])
                             this.scope[neighCell]++
                         else
                             this.scope[neighCell] = 1
-
-                        if (this.scope[neighCell] > 3 || this.scope[neighCell] < 2) {
-                            this.scope[neighCell]['active'] = false
-                            delete nextActiveCells[neighCell]
-                        } else if (this.scope[neighCell] == 3) {
-                            this.scope[neighCell]['active'] = true
-                            nextActiveCells[neighCell] = 1
-                        } else if (this.activeCells[neighCell]) {
-                            this.scope[neighCell]['active'] = true
-                            nextActiveCells[neighCell] = 1
-                        } else {
-                            this.scope[neighCell]['active'] = false
-                            delete nextActiveCells[neighCell]
-                        }
                     }
                 }
             }
 
-            for (cell in nextActiveCells) {
-
+            for (cell in this.scope) {
+                const pop = this.scope[cell]
                 const i = Number(cell.split(',')[0])
                     , j = Number(cell.split(',')[1])
 
-                nextGrid[i][j] = 1
+                if (pop == 3){
+                    this.activeCells[cell] = 0
+                    this.grid[i][j] = 1
+                }
+                else if (pop < 2 || pop > 3) {
+                    delete this.activeCells[cell]
+                    this.grid[i][j] = 0
+                }
             }
-
-            this.activeCells = nextActiveCells
-            this.grid = nextGrid
-
         },
 
         toggleCell(i, j) {
             this.grid[i][j] = (this.grid[i][j] + 1) % 2
 
             if (this.grid[i][j] == 1)
-                this.activeCells[`${i},${j}`] = 1
+                this.activeCells[`${i},${j}`] = 0
             else
                 delete this.activeCells[`${i},${j}`]
         },
@@ -91,12 +77,11 @@ const app = Vue.createApp({
         runSim() {
             const t0 = performance.now()
             this.updateGrid()
-            const t1 = performance.now()
-            
-            console.log(t1-t0)
-            
+
+            const t = performance.now() - t0
+
             if (this.keepGoing)
-                setTimeout(() => this.runSim(), 300 - this.simSpeed * 30);
+                setTimeout(() => this.runSim(), 300 - t - this.simSpeed * 30);
         },
 
         toggleMouse(isDown) {
@@ -111,8 +96,8 @@ const app = Vue.createApp({
         },
 
         changeX(event) {
-            if (event.target.value > 64)
-                event.target.value = 64
+            if (event.target.value > this.maxx)
+                event.target.value = this.maxx
             else if (event.target.value < 8)
                 event.target.value = 8
 
@@ -121,8 +106,8 @@ const app = Vue.createApp({
         },
 
         changeY(event) {
-            if (event.target.value > 64)
-                event.target.value = 64
+            if (event.target.value > this.maxy)
+                event.target.value = this.maxy
             else if (event.target.value < 8)
                 event.target.value = 8
 
