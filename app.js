@@ -4,7 +4,7 @@ const app = Vue.createApp({
             grid: [],
             activeCells: {},
             scope: {},
-            dimx: 32,
+            dimx: 64,
             dimy: 32,
             maxx: 128,
             maxy: 128,
