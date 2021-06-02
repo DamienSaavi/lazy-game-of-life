@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta hhtp-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <title>Game of Life</title>
@@ -23,14 +27,14 @@
                 <label class='dim' for="numCols">speed:
                     <input onclick="this.select()" type="number" min="1" max="10" :value="simSpeed" class='range'
                         id="numCols" @input="changeSpeed"></label>
-            </div>
+            
             <div class='btn-container'>
                 <button id='clear' v-on:click='clearGrid()'>Clear</button>
                 <button id='step' v-on:click='updateGrid()'>Step</button>
                 <button id='play' v-on:click='toggleSim()'>{{keepGoing ? 'Stop Game' : 'Run Game'}}</button>
-            </div>
+            </div></div>
         </div>
-        <table :class="keepGoing ? 'transparent' : ''" @mousedown="toggleMouse(true)" @mouseup="toggleMouse(false)"
+        <table :class="keepGoing ? 'transparent table-running' : ''" @mousedown="toggleMouse(true)" @mouseup="toggleMouse(false)"
             @mouseleave="toggleMouse(false)">
             <tr v-for="(row , i) in grid">
                 <td v-for="(cell, j) in row" :class="cell ? 'on' : 'off'" @mousedown="toggleCell(i,j)"
@@ -39,6 +43,43 @@
                 </td>
             </tr>
         </table>
+        <div class='info-container'>
+            <div class='info-section'>
+                <h2 class='info-header'>What is Game of Life?</h2>
+                <hr/>
+                <p class='info-desc'>Game of Life is a cellular automaton devised by the mathematician John Horton
+                    Conway. It is a
+                    "zero-player" game; the outcome is dependant on the initial configuration set by the player after
+                    which
+                    no other input is necessary.<br />
+                    The wildly unpredictible and interesting resulting outcomes are based on 4 simple rules applied to a
+                    grid of cells which are either "alive" (on) or "dead" (off):<br />
+                <ol class='rules-list'>
+                    <li class='rule'>Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+                    </li>
+                    <li class='rule'>Any live cell with two or three live neighbours lives on to the next generation.
+                    </li>
+                    <li class='rule'>Any live cell with more than three live neighbours dies, as if by overpopulation.
+                    </li>
+                    <li class='rule'>Any dead cell with exactly three live neighbours becomes a live cell, as if by
+                        reproduction.
+                    </li>
+                </ol><br/>
+                Visit the <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'>Wikipedia</a> page for more info.
+                </p>
+            </div>
+            <div class='info-section'>
+                <h2 class='info-header'>How to play?</h2>
+                <hr/>
+                <p class='info-desc'>Draw any pattern onto the grid and press "Start Game" to run the automaton.<br />
+                    Press the "Step" button
+                    to
+                    advance the automaton by one step.<br />
+                    You can also configure the game by setting the simulation speed and the height and width for the
+                    grid.
+                </p>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@3.0.11/dist/vue.global.prod.js"></script>
     <script src="app.js"></script>
