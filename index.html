@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta hhtp-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conway's Game of Life">
+    <meta name="keywords" content="Game of Life, game, of, life, Vue, Vuejs">
+    <meta name="author" content="Damien Mousavi">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
-      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <title>Game of Life</title>
@@ -27,15 +30,16 @@
                 <label class='dim' for="numCols">speed:
                     <input onclick="this.select()" type="number" min="1" max="10" :value="simSpeed" class='range'
                         id="numCols" @input="changeSpeed"></label>
-            
-            <div class='btn-container'>
-                <button id='clear' v-on:click='clearGrid()'>Clear</button>
-                <button id='step' v-on:click='updateGrid()'>Step</button>
-                <button id='play' v-on:click='toggleSim()'>{{keepGoing ? 'Stop Game' : 'Run Game'}}</button>
-            </div></div>
+
+                <div class='btn-container'>
+                    <button id='clear' v-on:click='clearGrid()'>Clear</button>
+                    <button id='step' v-on:click='updateGrid()'>Step</button>
+                    <button id='play' v-on:click='toggleSim()'>{{keepGoing ? 'Stop Game' : 'Run Game'}}</button>
+                </div>
+            </div>
         </div>
-        <table :class="keepGoing ? 'transparent table-running' : ''" @mousedown="toggleMouse(true)" @mouseup="toggleMouse(false)"
-            @mouseleave="toggleMouse(false)">
+        <table :class="keepGoing ? 'transparent table-running' : ''" @mousedown="toggleMouse(true)"
+            @mouseup="toggleMouse(false)" @mouseleave="toggleMouse(false)">
             <tr v-for="(row , i) in grid">
                 <td v-for="(cell, j) in row" :class="cell ? 'on' : 'off'" @mousedown="toggleCell(i,j)"
                     @mouseenter="drawCell(i,j)">
@@ -46,7 +50,7 @@
         <div class='info-container'>
             <div class='info-section'>
                 <h2 class='info-header'>What is Game of Life?</h2>
-                <hr/>
+                <hr />
                 <p class='info-desc'>Game of Life is a cellular automaton devised by the mathematician John Horton
                     Conway. It is a
                     "zero-player" game; the outcome is dependant on the initial configuration set by the player after
@@ -64,13 +68,14 @@
                     <li class='rule'>Any dead cell with exactly three live neighbours becomes a live cell, as if by
                         reproduction.
                     </li>
-                </ol><br/>
-                Visit the <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'>Wikipedia</a> page for more info.
+                </ol><br />
+                Visit the <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'>Wikipedia</a> page for more
+                info.
                 </p>
             </div>
             <div class='info-section'>
                 <h2 class='info-header'>How to play?</h2>
-                <hr/>
+                <hr />
                 <p class='info-desc'>Draw any pattern onto the grid and press "Start Game" to run the automaton.<br />
                     Press the "Step" button
                     to
@@ -82,7 +87,7 @@
         </div>
     </div>
     <footer><a href='https://github.com/DamienSaavi/lazy-game-of-life'>Made by Damien Mousavi</a></footer>
-    </div >
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@3.0.11/dist/vue.global.prod.js"></script>
     <script src="app.js"></script>
 
