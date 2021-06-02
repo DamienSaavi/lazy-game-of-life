@@ -10,7 +10,6 @@
 
   body {
     background-color:  #698894;
-    padding-bottom: 48px;
   }
   
   #app {
@@ -41,7 +40,7 @@
   td {
     width: 20px;
     max-width: 20px;
-    min-width: 2px;
+    min-width: 5px;
     /* transition: background-color 50ms linear; */
   }
 
@@ -168,4 +167,16 @@
     opacity: 50%;
     margin-bottom: 16px;
     margin-top: 8px;
+  }
+
+  footer {
+    font-size: large;
+    text-shadow: 1px 1px 1px black;
+    text-align: center;
+    text-decoration: black;
+    padding: 36px;
+  }
+
+  footer > a {
+    color: white;
   }
